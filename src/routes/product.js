@@ -2,7 +2,6 @@ import express from 'express';
 import { createProduct, deleteProductById, getAllProducts, getBySlug, getProductById, processPayment, relatedProduct, searchProduct, updateProduct} from '../controllers/product.js';
 import { upload } from '../helpers/multer.js';
 import { isLoggedIn } from '../middlewares/auth.js';
-import { deleteOrder, getAllOrders, getOrderById, getOrdersByDate, orderStatus } from '../controllers/order.js';
 
 const router = express.Router();
 
@@ -17,10 +16,5 @@ router.delete("/:productId", deleteProductById)
 
 // payments
 router.post("/payment", isLoggedIn, processPayment)
-
-
-
-
-
 
 export default router;

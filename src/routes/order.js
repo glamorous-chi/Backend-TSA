@@ -1,5 +1,5 @@
 import express from 'express';
-import { orderStatus, getAllOrders, getOrderById, deleteOrder, getOrdersByDate } from '../controllers/order.js';
+import { orderStatus, getAllOrders, getOrderById, deleteOrder, searchOrdersByDate} from '../controllers/order.js';
 
 const router = express.Router();
 
@@ -10,6 +10,6 @@ router.put("/order-status/:orderId", orderStatus)
 router.get("/all", getAllOrders)
 router.get("/order/:orderId", getOrderById)
 router.delete("/delete/:orderId", deleteOrder)
-router.get("/search", getOrdersByDate)
+router.post("/search", searchOrdersByDate)
 
 export default router;

@@ -1,4 +1,3 @@
-import order from "../models/order.js";
 import Order from "../models/order.js";
 
 export const orderStatus = async (req, res) => {
@@ -61,36 +60,36 @@ export const deleteOrder = async (req, res) => {
     }
 }
 // search orders by date
-export const getOrdersByDate = async (req, res) => {
-    // Extract the date parameter from the request query
-    const { date } = req.query;
-    const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 5; // The limit parameter indicates the maximum number of items that the client wants to receive in a single response.
-    const skip = (page - 1) * limit;
-    try {
-        // Convert the date string to a JavaScript Date object
-        const searchDate = new Date(date);
+// export const getOrdersByDate = async (req, res) => {
+//     // Extract the date parameter from the request query
+//     const { date } = req.query;
+//     const page = parseInt(req.query.page) || 1;
+//     const limit = parseInt(req.query.limit) || 5; // The limit parameter indicates the maximum number of items that the client wants to receive in a single response.
+//     const skip = (page - 1) * limit;
+//     try {
+//         // Convert the date string to a JavaScript Date object
+//         const searchDate = new Date(date);
 
-        // Construct the query to find orders with the specified date
-        const orders = await Order.find({
-            orderDate: { $gte: searchDate, $lt: new Date(searchDate.getTime() + 86400000) } // Adding 24 hours to include the entire day
-        }).skip(skip).limit(limit);
+//         // Construct the query to find orders with the specified date
+//         const orders = await Order.find({
+//             orderDate: { $gte: searchDate, $lt: new Date(searchDate.getTime() + 86400000) } // Adding 24 hours to include the entire day
+//         }).skip(skip).limit(limit);
 
-        const totalOrders = await Order.countDocuments(orders);
+//         const totalOrders = await Order.countDocuments(orders);
 
-        res.status(200).json({
-            message: "Orders retrieved successfully",
-            currentPage: page,
-            ordersFound: totalOrders,
-            totalOrders: Math.ceil(totalOrders / limit),
-            orders
-        });
-    }
-    catch (err) {
-        console.error('Error searching orders by date:', err);
-        res.status(500).json({ message: 'Failed to search orders by date', err: err.message });
-    }
-};
+//         res.status(200).json({
+//             message: "Orders retrieved successfully",
+//             currentPage: page,
+//             ordersFound: totalOrders,
+//             totalOrders: Math.ceil(totalOrders / limit),
+//             orders
+//         });
+//     }
+//     catch (err) {
+//         console.error('Error searching orders by date:', err);
+//         res.status(500).json({ message: 'Failed to search orders by date', err: err.message });
+//     }
+// };
 export const searchOrdersByDate = async (req, res) => {
     const { startDate, endDate } = req.query;
     const page = parseInt(req.query.page) || 1;
