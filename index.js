@@ -13,7 +13,11 @@ import orderRouter from "./src/routes/order.js"
 // initialize express server
 const app = express();
 app.use(express.json())
-app.use(cors(["http://localhost:5173", "http://localhost:5174"])) //these are ehte cors allowed origin
+
+let corsOptions = { 
+    origin : ['http://localhost:5173',"https://fragrancehub-chiomas-projects-503ed07e.vercel.app", 'http://localhost:5174', 'http://localhost:3000'], 
+  } 
+app.use(cors(corsOptions)); //these are the cors allowed origin
 
 const port = process.env.PORT
 const dbUrl = process.env.MONGODB_URL
